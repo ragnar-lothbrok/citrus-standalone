@@ -1,0 +1,13 @@
+Solution1:
+
+MainClass.java
+
+CSV File : Temp_Data.csv
+XML File : temp.xml
+
+Solution3 :
+MazeSolution.java
+
+Input File : mazeInput.txt
+
+Assumption : horizontally forward and vertically downward.
