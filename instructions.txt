@@ -1,13 +1,22 @@
 Solution1:
 
-MainClass.java
+MainClass.java contains main method to see output we have to run this file.
 
+Static Files : 
 CSV File : Temp_Data.csv
 XML File : temp.xml
 
+Can be done[Enhancement] :
+1. We can also use Open CSV for parsing CSV file.
+2. We can parse file at every time when method is called but as all 4 operations need to be done at once so
+   I parsed both the files only once and then started performing operations.
+3. We can also take file names using command line arguments or scanner.
+
 Solution3 :
 MazeSolution.java
-
 Input File : mazeInput.txt
+Assumption : horizontally forward and vertically downward only.
 
-Assumption : horizontally forward and vertically downward.
+SecondMazeSolution.java
+Input File : mazeInput.txt
+Assumption : horizontally forward/backward and vertically downward/upward.

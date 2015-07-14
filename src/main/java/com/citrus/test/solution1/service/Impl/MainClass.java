@@ -15,11 +15,11 @@ public class MainClass {
     
     public static void main(String[] args) {
 
-        GenericParser csvGenericParser = ParserUtility.getParserInstance(ParserTypeEnum.CSV);
-        GenericParser xmlGenericParser = ParserUtility.getParserInstance(ParserTypeEnum.XML);
+        GenericParser csvParser = ParserUtility.getParserInstance(ParserTypeEnum.CSV);
+        GenericParser xmlParser = ParserUtility.getParserInstance(ParserTypeEnum.XML);
 
-        Set<Record> csvRecordList = csvGenericParser.parse("Temp_Data.csv");
-        Set<Record> xmlRecordList = xmlGenericParser.parse("temp.xml");
+        Set<Record> csvRecordList = csvParser.parse("Temp_Data.csv");
+        Set<Record> xmlRecordList = xmlParser.parse("temp.xml");
         
         logger.info("Operations Started......");
         
@@ -33,6 +33,10 @@ public class MainClass {
         logger.info("Records which are present in XML but not in CSV : "+ParserUtility.getDiffRecords(csvRecordList, xmlRecordList, DiffTypeEnum.XML_CSV).size());
         
         logger.info("Records which are present in CSV but not in XML : "+ParserUtility.getDiffRecords(csvRecordList, xmlRecordList, DiffTypeEnum.CSV_XML).size());
+        
+logger.info("Records which are present in XML but not in CSV : "+ParserUtility.getDiffRecordsAlternate(csvRecordList, xmlRecordList, DiffTypeEnum.XML_CSV).size());
+        
+        logger.info("Records which are present in CSV but not in XML : "+ParserUtility.getDiffRecordsAlternate(csvRecordList, xmlRecordList, DiffTypeEnum.CSV_XML).size());
         
         logger.info("Operations finished....");
         

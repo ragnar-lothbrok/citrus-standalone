@@ -89,6 +89,7 @@ public class ParserUtility {
         Set<Record> modifedSet = new HashSet<Record>();
         if (allCSVRecords.size() > 0 || allXMLRecords.size() > 0) {
             if (diffTypeEnum != null) {
+                // Return records which are in XML but not in CSV
                 if (diffTypeEnum.equals(DiffTypeEnum.XML_CSV)) {
                     Iterator<Record> iterator = allXMLRecords.iterator();
                     while (iterator.hasNext()) {
@@ -97,7 +98,9 @@ public class ParserUtility {
                             modifedSet.add(record);
                         }
                     }
-                } else if (diffTypeEnum.equals(DiffTypeEnum.CSV_XML)) {
+                }
+                // Return records which are in CSV but not in XML
+                else if (diffTypeEnum.equals(DiffTypeEnum.CSV_XML)) {
                     Iterator<Record> iterator = allCSVRecords.iterator();
                     while (iterator.hasNext()) {
                         Record record = iterator.next();
@@ -105,6 +108,34 @@ public class ParserUtility {
                             modifedSet.add(record);
                         }
                     }
+                }
+            }
+        }
+        return modifedSet;
+    }
+
+    /**
+     * Method will return Records on the basis of DiffTypeEnum
+     * 
+     * @param allCSVRecords
+     * @param allXMLRecords
+     * @param diffTypeEnum
+     * @return
+     */
+    public static Set<Record> getDiffRecordsAlternate(Set<Record> allCSVRecords, Set<Record> allXMLRecords,
+            DiffTypeEnum diffTypeEnum) {
+        Set<Record> modifedSet = new HashSet<Record>();
+        if (allCSVRecords.size() > 0 || allXMLRecords.size() > 0) {
+            if (diffTypeEnum != null) {
+                // Return records which are in XML but not in CSV
+                if (diffTypeEnum.equals(DiffTypeEnum.XML_CSV)) {
+                    modifedSet.addAll(allXMLRecords);
+                    modifedSet.removeAll(allCSVRecords);
+                }
+                // Return records which are in CSV but not in XML
+                else if (diffTypeEnum.equals(DiffTypeEnum.CSV_XML)) {
+                    modifedSet.addAll(allCSVRecords);
+                    modifedSet.removeAll(allXMLRecords);
                 }
             }
         }
