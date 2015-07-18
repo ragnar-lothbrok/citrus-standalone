@@ -16,8 +16,8 @@ public class SecondMazeSolution {
     public static void main(String args[]) throws Exception {
         BufferedReader bufferReader = null;
         try {
-            bufferReader = new BufferedReader(new FileReader(new File(SecondMazeSolution.class.getResource("mazeInput.txt")
-                    .getFile())));
+            bufferReader = new BufferedReader(new FileReader(new File(SecondMazeSolution.class.getResource(
+                    "mazeInput.txt").getFile())));
             while (bufferReader.readLine().indexOf("=====") != -1) {
                 String line = bufferReader.readLine();
                 String str[] = line.split(",");
@@ -51,7 +51,7 @@ public class SecondMazeSolution {
                     if (shortestPath == null || shortestPath.size() == 0) {
                         System.out.println("Not Possible");
                     } else {
-                        //Will format the output in required format.
+                        // Will format the output in required format.
                         StringBuilder builder = new StringBuilder();
                         Iterator<Point> iterator = shortestPath.iterator();
                         while (iterator.hasNext()) {
@@ -118,48 +118,50 @@ public class SecondMazeSolution {
                         temp.getNeighbourList().add(temp);
                         shortestPath = temp.getNeighbourList();
                     }
+                } else {
+                    if (temp != null) {
+                        if (temp.getCol() + 1 < shortArr[0].length && visited[temp.getRow()][temp.getCol() + 1] != -1
+                                && shortArr[temp.getRow()][temp.getCol() + 1] != 1) {
+                            visited[temp.getRow()][temp.getCol() + 1] = -1;
+                            point = new Point(temp.getRow(), temp.getCol() + 1, temp.getDistance() + 1);
+                            if (temp.getNeighbourList().size() != 0)
+                                point.getNeighbourList().addAll(temp.getNeighbourList());
+                            point.getNeighbourList().add(temp);
+                            queue.add(point);
+                        }
+
+                        if (temp.getRow() + 1 < shortArr.length && visited[temp.getRow() + 1][temp.getCol()] != -1
+                                && shortArr[temp.getRow() + 1][temp.getCol()] != 1) {
+                            visited[temp.getRow() + 1][temp.getCol()] = -1;
+                            point = new Point(temp.getRow() + 1, temp.getCol(), temp.getDistance() + 1);
+                            if (temp.getNeighbourList().size() != 0)
+                                point.getNeighbourList().addAll(temp.getNeighbourList());
+                            point.getNeighbourList().add(temp);
+                            queue.add(point);
+                        }
+
+                        if (temp.getCol() - 1 >= 0 && visited[temp.getRow()][temp.getCol() - 1] != -1
+                                && shortArr[temp.getRow()][temp.getCol() - 1] != 1) {
+                            visited[temp.getRow()][temp.getCol() - 1] = -1;
+                            point = new Point(temp.getRow(), temp.getCol() - 1, temp.getDistance() + 1);
+                            if (temp.getNeighbourList().size() != 0)
+                                point.getNeighbourList().addAll(temp.getNeighbourList());
+                            point.getNeighbourList().add(temp);
+                            queue.add(point);
+                        }
+
+                        if (temp.getRow() - 1 >= 0 && visited[temp.getRow() - 1][temp.getCol()] != -1
+                                && shortArr[temp.getRow() - 1][temp.getCol()] != 1) {
+                            visited[temp.getRow() - 1][temp.getCol()] = -1;
+                            point = new Point(temp.getRow() - 1, temp.getCol(), temp.getDistance() + 1);
+                            if (temp.getNeighbourList().size() != 0)
+                                point.getNeighbourList().addAll(temp.getNeighbourList());
+                            point.getNeighbourList().add(temp);
+                            queue.add(point);
+                        }
+                    }
                 }
-                if (temp != null) {
-                    if (temp.getCol() + 1 < shortArr[0].length && visited[temp.getRow()][temp.getCol() + 1] != -1
-                            && shortArr[temp.getRow()][temp.getCol() + 1] != 1) {
-                        visited[temp.getRow()][temp.getCol() + 1] = -1;
-                        point = new Point(temp.getRow(), temp.getCol() + 1, temp.getDistance() + 1);
-                        if (temp.getNeighbourList().size() != 0)
-                            point.getNeighbourList().addAll(temp.getNeighbourList());
-                        point.getNeighbourList().add(temp);
-                        queue.add(point);
-                    }
-                    
-                    if (temp.getRow() + 1 < shortArr.length && visited[temp.getRow() + 1][temp.getCol()] != -1
-                            && shortArr[temp.getRow() + 1][temp.getCol()] != 1) {
-                        visited[temp.getRow() + 1][temp.getCol()] =-1;
-                        point = new Point(temp.getRow() + 1, temp.getCol(), temp.getDistance() + 1);
-                        if (temp.getNeighbourList().size() != 0)
-                            point.getNeighbourList().addAll(temp.getNeighbourList());
-                        point.getNeighbourList().add(temp);
-                        queue.add(point);
-                    }
-                    
-                    if (temp.getCol() - 1 >= 0 && visited[temp.getRow()][temp.getCol() - 1] != -1
-                            && shortArr[temp.getRow()][temp.getCol() - 1] != 1) {
-                        visited[temp.getRow()][temp.getCol() - 1]=-1;
-                        point = new Point(temp.getRow(), temp.getCol() - 1, temp.getDistance() + 1);
-                        if (temp.getNeighbourList().size() != 0)
-                            point.getNeighbourList().addAll(temp.getNeighbourList());
-                        point.getNeighbourList().add(temp);
-                        queue.add(point);
-                    }
-                    
-                    if (temp.getRow() - 1 >= 0 && visited[temp.getRow() - 1][temp.getCol()] != -1
-                            && shortArr[temp.getRow() - 1][temp.getCol()] != 1) {
-                        visited[temp.getRow() - 1][temp.getCol()] =-1;
-                        point = new Point(temp.getRow() - 1, temp.getCol(), temp.getDistance() + 1);
-                        if (temp.getNeighbourList().size() != 0)
-                            point.getNeighbourList().addAll(temp.getNeighbourList());
-                        point.getNeighbourList().add(temp);
-                        queue.add(point);
-                    }
-                }
+
             }
         }
         return shortestPath;
